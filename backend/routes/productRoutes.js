@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-// @route   GET /api/products
-// @desc    Получить все продукты
+// @route   GET /api/users
+// @desc    Получить всех пользователей (пока просто тест)
 router.get("/", (req, res) => {
-    res.json({ message: "Здесь будут товары" });
+  res.json({ message: "Список пользователя" });
 });
 
 module.exports = router;

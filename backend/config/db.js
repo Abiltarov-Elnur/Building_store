@@ -1,19 +1,17 @@
-const mysql = require("mysql2");
-require("dotenv").config(); // Загружаем переменные окружения из .env
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST, // Хост (обычно localhost)
-  user: process.env.DB_USER, // Имя пользователя MySQL
-  password: process.env.DB_PASSWORD, // Пароль от MySQL
-  database: process.env.DB_NAME, // Название базы данных
-});
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log(`✅ MongoDB подключен: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Ошибка: ${error.message}`);
+        process.exit(1);
+    }
+};
 
-db.connect((err) => {
-  if (err) {
-    console.error("❌ Ошибка подключения к MySQL:", err);
-    return;
-  }
-  console.log("✅ Подключено к MySQL");
-});
-
-module.exports = db;
+module.exports = connectDB;
