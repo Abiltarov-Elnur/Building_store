@@ -28,10 +28,11 @@ const productRoutes = require("./routes/productRoutes");
 app.use("/api/products", productRoutes);
 
 app.use("/api/users", userRoutes);
-app.use("/api/products", productRoutes);
+
 
 
 // Запуск сервера
 app.listen(PORT, () => {
     console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
+

@@ -1,10 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const Product = require("../models/product"); // Убедись, что у тебя есть модель
 
-// @route   GET /api/users
-// @desc    Получить всех пользователей (пока просто тест)
-router.get("/", (req, res) => {
-  res.json({ message: "Список пользователя" });
+// Получить все товары
+router.get("/", async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.json(products);
+  } catch (error) {
+    console.error("Ошибка получения товаров:", error);
+    res.status(500).json({ message: "Ошибка сервера" });
+  }
 });
 
 module.exports = router;
